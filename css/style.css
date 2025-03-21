@@ -202,3 +202,20 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
 .yellow-text {
     color: yellow !important;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    width: 5%;
+    height: 30px;
+    text-align: center;
+}
+th {
+    background-color: #ddd;
+}
+td[contenteditable="true"] {
+    background-color: #f9f9f9;
+}

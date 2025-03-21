@@ -169,11 +169,11 @@
 
                 <ul class="sidebar-nav">
                     <li class="sidebar-header">
-                        Ocorrências e Atestados
+                        Variedades
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#ocorrenciaApae" data-bs-toggle="collapse">
-                            <i class="fa-solid fa-file-lines pe-2"></i> OCORRÊNCIAS APAE
+                            <i class="fa-solid fa-file-lines pe-2"></i> VARIEDADES APAE
                         </a>
                         <ul id="ocorrenciaApae" class="sidebar-dropdown list-unstyled collapse">
                             <li class="sidebar-item">
@@ -193,7 +193,7 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#ocorrenciaPref" data-bs-toggle="collapse"
                             aria-expanded="false"><i class="fa-solid fa-sliders pe-2"></i>
-                            OCORRÊNCIAS PREFEITURA
+                            VARIEDADES PREFEITURA
                         </a>
                         <ul id="ocorrenciaPref" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
@@ -210,7 +210,7 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#ocorrenciaNoa" data-bs-toggle="collapse"
                             aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
-                            OCORRÊNCIAS NOA
+                            VARIEDADES NOA
                         </a>
                         <ul id="ocorrenciaNoa" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
@@ -302,89 +302,9 @@
                         <tbody>
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
-                      </table>
-                    
-                    <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-<h3 class="mt-5">Frequência de Alunos em Março</h3>
-<p>Rafael, Ana e Luciana - detalhes aqui.</p>
-<table class="table my-4 table-hover table-striped w-100">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <!-- Gerando os dias de 1 a 21 -->
-            <script>
-                document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-            </script>
-        </tr>
-    </thead>
-    <tbody id="tabela-frequencia">
-        <script>
-            const alunosApae1 = [
-                "Carlos Silva",
-                "Mariana Souza",
-                "Pedro Oliveira",
-                "Ana Clara Mendes",
-                "Lucas Ferreira",
-                "Gabriela Rocha",
-                "Ricardo Lima",
-                "Fernanda Alves"
-            ];
+                      </table>      
+                    </div>
 
-            document.write(alunosApae1.map(nome => `
-                <tr>
-                    <td>${nome}</td>
-                    ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                </tr>
-            `).join(''));
-        </script>
-    </tbody>
-</table>
-
-<!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesApae1 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesApae1.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
 
 
                     <!--Roteiro 2 APAE-->
@@ -417,85 +337,8 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Márcio e Camily - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosApae2 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosApae2.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
+                    </div>
 
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesApae2 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesApae2.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
 
 
                     <!--Roteiro 3 APAE-->
@@ -528,85 +371,8 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Alex 2 e Rosanda- detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosApae3 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosApae3.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
+                    </div>
 
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesApae3 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesApae3.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
 
 
                     <!--Roteiro 4 APAE-->
@@ -638,87 +404,8 @@
                         <tbody>
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
-                      </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Alex e Jennifer - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosApae4 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosApae4.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesApae4 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesApae4.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
-                    
+                      </table>  
+                    </div>
                     
                     
                     
@@ -754,85 +441,7 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Flávio, Sara e Ana - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosPref1 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosPref1.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesPref1 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesPref1.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
+                    </div>
 
 
                     <!--Roteiro 2 pref-->
@@ -865,85 +474,7 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Ferraz e Dani - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosPref2 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosPref2.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesPref2 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesPref2.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
+                    </div>
 
 
                     <!--Roteiro 3 pref-->
@@ -976,86 +507,7 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Silvio e Priscila - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosPref3 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosPref3.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesPref3 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesPref3.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
-
+                    </div>
 
 
 
@@ -1091,85 +543,7 @@
                         <!-- Dados preenchidos dinamicamente por JavaScript -->
                       </tbody>
                     </table>
-                    <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Valter e Alaide - detalhes aqui.</p>   
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosNoa1 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosNoa1.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesNoa1 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesNoa1.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>                                       
+                </div>                                       
                     
 
 
@@ -1204,85 +578,7 @@
                         <!-- Dados preenchidos dinamicamente por JavaScript -->
                       </tbody>
                     </table>
-                    <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Antonino e Sara - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosNoa2 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosNoa2.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesNoa2 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesNoa2.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
+                    </div>
 
 
 
@@ -1316,86 +612,8 @@
                         <tbody>
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
-                      </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>André e Giovana - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosNoa3 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosNoa3.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesNoa3 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesNoa3.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
+                      </table>  
+                    </div>
 
 
 
@@ -1429,85 +647,7 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Leandro e Luara - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosNoa4 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosNoa4.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesNoa4 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesNoa4.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
+                    </div>
 
                     
 
@@ -1541,85 +681,7 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                       <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Sergio e Maísa - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosNoa5 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosNoa5.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesNoa5 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesNoa5.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
+                    </div>
 
 
 
@@ -1653,85 +715,7 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Genildo e Estephany - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosNoa6 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosNoa6.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesNoa6 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesNoa6.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
-            </div>
-        `).join(''));
-    </script>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
+                    </div>
 
 
 
@@ -1765,8 +749,548 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    </div>
+
+
+
+
+
+                    <!--Frequência 1 APAE-->    
+                    <div id="frequencia1apae" class="tab-pane fade">
+                        <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                        <p>Rafael, Ana e Luciana - detalhes aqui.</p>
+                        <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-frequencia">
+                            <script>
+                                const alunosApae1 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                                ];
+                        document.write(alunosApae1.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                            ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                        </tr>
+                        `).join(''));
+                            </script>
+                        </tbody>
+                    </table>
+            <!-- Botão de salvar -->
+            <button id="salvar" class="btn btn-primary">Salvar</button>                 
+        </div>
+
+
+
+                <!--Frequência 2 APAE-->    
+                <div id="frequencia2apae" class="tab-pane fade">
                     <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Márcio e Camily - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosApae2 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosApae2.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+
+
+
+                <!--Frequência 3 APAE--> 
+                <div id="frequencia3apae" class="tab-pane fade">
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Alex 2 e Rosanda- detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosApae3 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosApae3.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+                
+
+
+            <!--Frequência 4 APAE--> 
+            <div id="frequencia4apae" class="tab-pane fade">
+                <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                <p>Alex e Jennifer - detalhes aqui.</p>
+                <table class="table my-4 table-hover table-striped w-100">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                                <!-- Gerando os dias de 1 a 21 -->
+                            <script>
+                                document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                            </script>
+                        </tr>
+                    </thead>
+                <tbody id="tabela-frequencia">
+                    <script>
+                        const alunosApae4 = [
+                            "Carlos Silva",
+                            "Mariana Souza",
+                            "Pedro Oliveira",
+                            "Ana Clara Mendes",
+                            "Lucas Ferreira",
+                            "Gabriela Rocha",
+                            "Ricardo Lima",
+                            "Fernanda Alves"
+                        ];
+                document.write(alunosApae4.map(nome => `
+                    <tr>
+                        <td>${nome}</td>
+                            ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                        </tr>
+                        `).join(''));
+                    </script>
+                </tbody>
+            </table>
+            <!-- Botão de salvar -->
+            <button id="salvar" class="btn btn-primary">Salvar</button>
+        </div>
+
+
+
+        <!--Frequência 1 PREF-->
+        <div id="frequencia1pref" class="tab-pane fade">
+        <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Flávio, Sara e Ana - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosPref1 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosPref1.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+
+        
+
+        <!--Frequência 2 PREF-->
+        <div id="frequencia2pref" class="tab-pane fade">
+        <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Ferraz e Dani - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosPref2 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosPref2.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+
+
+
+            <!--Frequência 3 PREF-->
+            <div id="frequencia3pref" class="tab-pane fade">
+            <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Silvio e Priscila - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosPref3 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosPref3.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+
+
+
+
+            <!--Frequência 1 NOA-->
+            <div id="frequencia1noa" class="tab-pane fade">
+            <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Valter e Alaide - detalhes aqui.</p>   
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa1 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa1.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>     
+            </div>
+
+
+
+
+            <!--Frequência 2 NOA-->
+            <div id="frequencia2noa" class="tab-pane fade">
+            <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Antonino e Sara - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa2 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa2.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+
+
+            <!--Frequência 3 NOA-->
+            <div id="frequencia3noa" class="tab-pane fade">
+                <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                <p>André e Giovana - detalhes aqui.</p>
+                <table class="table my-4 table-hover table-striped w-100">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                                <!-- Gerando os dias de 1 a 21 -->
+                            <script>
+                                document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                            </script>
+                        </tr>
+                    </thead>
+                <tbody id="tabela-frequencia">
+                    <script>
+                        const alunosNoa3 = [
+                            "Carlos Silva",
+                            "Mariana Souza",
+                            "Pedro Oliveira",
+                            "Ana Clara Mendes",
+                            "Lucas Ferreira",
+                            "Gabriela Rocha",
+                            "Ricardo Lima",
+                            "Fernanda Alves"
+                        ];
+                document.write(alunosNoa3.map(nome => `
+                    <tr>
+                        <td>${nome}</td>
+                            ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                        </tr>
+                        `).join(''));
+                    </script>
+                </tbody>
+            </table>
+            <!-- Botão de salvar -->
+            <button id="salvar" class="btn btn-primary">Salvar</button>
+        </div>
+
+
+
+        <!--Frequência 4 NOA-->
+        <div id="frequencia4noa" class="tab-pane fade">
+            <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Leandro e Luara - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa4 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa4.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+
+
+
+            <!--Frequência 5 NOA-->
+            <div id="frequencia5noa" class="tab-pane fade">
+            <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Sergio e Maísa - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa5 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa5.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+
+
+            <!--Frequência 6 NOA-->
+            <div id="frequencia6noa" class="tab-pane fade">
+                <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Genildo e Estephany - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa6 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa6.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+            </div>
+
+
+
+            <!--Frequência 7 NOA-->
+            <div id="frequencia7noa" class="tab-pane fade">
+                <h3 class="mt-5">Frequência de Alunos em Março</h3>
                     <p>Jussimar e Camila - detalhes aqui.</p>
                     <table class="table my-4 table-hover table-striped w-100">
                         <thead>
@@ -1800,54 +1324,17 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-<button id="salvar" class="btn btn-primary">Salvar</button>
-
-<!-- Upload de Imagens por Mês -->
-<h3 class="mt-5">Upload de Imagens</h3>
-<p>Anexe arquivos PNG correspondentes a cada mês.</p>
-<div id="upload-container" class="row mt-4">
-    <script>
-        const mesesNoa7 = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.write(mesesNoa7.map(mes => `
-            <div class="col-md-4 col-sm-6 col-12 mb-4">
-                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
-                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
-                <div class="preview mt-3 text-center"></div>
+                <button id="salvar" class="btn btn-primary">Salvar</button>
             </div>
-        `).join(''));
-    </script>
+
+
+
+
+
+
+            
+            </div>   
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".upload-input").forEach(input => {
-            input.addEventListener("change", function(event) {
-                let file = event.target.files[0];
-                let previewContainer = event.target.nextElementSibling;
-
-                if (file && file.type === "image/png") {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Por favor, selecione um arquivo PNG.");
-                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
-                }
-            });
-        });
-    });
-</script>
-</div>
-
-
-</div>
-            </div>
         </div>
     </div>
 

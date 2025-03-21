@@ -132,7 +132,7 @@
                     <!--Roteiro 1 APAE-->
                     <div id="roteiro1apae" class="tab-pane fade">
                         <h3>Roteiro 1 APAE</h3>
-                        <p>Rafal, Ana e Luciana - detalhes aqui.</p>
+                        <p>Rafael, Ana e Luciana - detalhes aqui.</p>
                         <table
                         class="table my-4 table-hover table-striped w-100"
                         id="#"
@@ -159,7 +159,80 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                  </div>
+                    
+                    <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Rafael, Ana e Luciana - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosApae1 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosApae1.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
 
 
                     <!--Roteiro 2 APAE-->
@@ -192,7 +265,79 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                  </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Márcio e Camily - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosApae2 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosApae2.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
 
 
                     <!--Roteiro 3 APAE-->
@@ -225,7 +370,79 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                  </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Alex 2 e Rosanda- detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosApae3 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosApae3.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
 
 
                     <!--Roteiro 4 APAE-->
@@ -258,7 +475,79 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                  </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Alex e Jennifer - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosApae4 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosApae4.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
                     
                     
                     
@@ -295,7 +584,79 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                  </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Flávio, Sara e Ana - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosPref1 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosPref1.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
 
 
                     <!--Roteiro 2 pref-->
@@ -328,7 +689,79 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                  </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Ferraz e Dani - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosPref2 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosPref2.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
 
 
                     <!--Roteiro 3 pref-->
@@ -361,7 +794,79 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                  </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Silvio e Priscila - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosPref3 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosPref3.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
 
 
 
@@ -398,8 +903,82 @@
                         <!-- Dados preenchidos dinamicamente por JavaScript -->
                       </tbody>
                     </table>
-                </div>                                       
+                    <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Valter e Alaide - detalhes aqui.</p>   
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa1 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa1.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>                                       
                     
+
+
 
                     <!--Roteiro 2 NOA-->
                     <div id="roteiro2noa" class="tab-pane fade">
@@ -431,7 +1010,81 @@
                         <!-- Dados preenchidos dinamicamente por JavaScript -->
                       </tbody>
                     </table>
-                    </div>
+                    <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Antonino e Sara - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa2 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa2.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
+
+
 
 
                     <!--Roteiro 3 NOA-->
@@ -464,7 +1117,80 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>André e Giovana - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa3 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa3.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
+
 
 
                     <!--Roteiro 4 NOA-->  
@@ -497,9 +1223,82 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Leandro e Luara - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa4 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa4.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
 
                     
+
                     <!--Roteiro 5 NOA-->  
                     <div id="roteiro5noa" class="tab-pane fade">
                         <h3>Roteiro 5 NOA</h3>
@@ -530,7 +1329,80 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      </div>
+                       <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Sergio e Maísa - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa5 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa5.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
+
 
 
                     <!--Roteiro 6 NOA-->    
@@ -563,7 +1435,80 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
-                      </div>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Genildo e Estephany - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa6 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa6.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+</div>
+
 
 
                     <!--Roteiro 7 NOA-->    
@@ -596,6 +1541,80 @@
                           <!-- Dados preenchidos dinamicamente por JavaScript -->
                         </tbody>
                       </table>
+                      <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
+                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
+                    <p>Jussimar e Camila - detalhes aqui.</p>
+                    <table class="table my-4 table-hover table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                    <!-- Gerando os dias de 1 a 21 -->
+                                <script>
+                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+                                </script>
+                            </tr>
+                        </thead>
+                    <tbody id="tabela-frequencia">
+                        <script>
+                            const alunosNoa7 = [
+                                "Carlos Silva",
+                                "Mariana Souza",
+                                "Pedro Oliveira",
+                                "Ana Clara Mendes",
+                                "Lucas Ferreira",
+                                "Gabriela Rocha",
+                                "Ricardo Lima",
+                                "Fernanda Alves"
+                            ];
+                    document.write(alunosNoa7.map(nome => `
+                        <tr>
+                            <td>${nome}</td>
+                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                            </tr>
+                            `).join(''));
+                        </script>
+                    </tbody>
+                </table>
+                <!-- Botão de salvar -->
+                <button id="salvar" class="btn btn-primary">Salvar</button>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".editable").forEach(cell => {
+                                cell.addEventListener("input", function() {
+                                let value = this.innerText.toUpperCase().trim();
+                                    if (!["P", "F", "A"].includes(value)) {
+                                        this.innerText = ""; // Remove valores inválidos
+                                    } else {
+                                        this.innerText = value; // Mantém o valor em maiúsculo
+                                    }
+                                });
+            cell.addEventListener("paste", function(e) {
+                e.preventDefault();
+                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
+                if (["P", "F", "A"].includes(text)) {
+                    document.execCommand("insertText", false, text);
+                }
+            });
+        });
+
+        document.getElementById("salvar").addEventListener("click", function() {
+            let tabela = document.querySelector("#tabela-frequencia");
+            let dados = [];
+
+            tabela.querySelectorAll("tr").forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let nome = cells[0].innerText.trim();
+                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
+
+                dados.push({ nome, frequencia });
+            });
+
+            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
+        });
+    });
+</script>
+
+
                       </div>
                 </div>
             </div>

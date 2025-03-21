@@ -64,11 +64,11 @@
                         </ul>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#noa" data-bs-toggle="collapse"
                             aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
                             ROTEIROS NOA
                         </a>
-                        <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <ul id="noa" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
                                 <a href="#" class="sidebar-link tab-link yellow-text" data-tab="roteiro1noa">ㅤㅤㅤ- Valter e Alaide</a>
                             </li>
@@ -161,74 +161,82 @@
                       </table>
                     
                     <!-- Segunda tabela dentro da aba "Roteiro 1 APAE" -->
-                    <h3 class="mt-5">Frequência de Alunos em Março</h3>
-                    <p>Rafael, Ana e Luciana - detalhes aqui.</p>
-                    <table class="table my-4 table-hover table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                    <!-- Gerando os dias de 1 a 21 -->
-                                <script>
-                                    document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
-                                </script>
-                            </tr>
-                        </thead>
-                    <tbody id="tabela-frequencia">
-                        <script>
-                            const alunosApae1 = [
-                                "Carlos Silva",
-                                "Mariana Souza",
-                                "Pedro Oliveira",
-                                "Ana Clara Mendes",
-                                "Lucas Ferreira",
-                                "Gabriela Rocha",
-                                "Ricardo Lima",
-                                "Fernanda Alves"
-                            ];
-                    document.write(alunosApae1.map(nome => `
-                        <tr>
-                            <td>${nome}</td>
-                                ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
-                            </tr>
-                            `).join(''));
-                        </script>
-                    </tbody>
-                </table>
-                <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<h3 class="mt-5">Frequência de Alunos em Março</h3>
+<p>Rafael, Ana e Luciana - detalhes aqui.</p>
+<table class="table my-4 table-hover table-striped w-100">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <!-- Gerando os dias de 1 a 21 -->
+            <script>
+                document.write(Array.from({ length: 21 }, (_, i) => `<th>${i + 1}/03</th>`).join(''));
+            </script>
+        </tr>
+    </thead>
+    <tbody id="tabela-frequencia">
+        <script>
+            const alunosApae1 = [
+                "Carlos Silva",
+                "Mariana Souza",
+                "Pedro Oliveira",
+                "Ana Clara Mendes",
+                "Lucas Ferreira",
+                "Gabriela Rocha",
+                "Ricardo Lima",
+                "Fernanda Alves"
+            ];
+
+            document.write(alunosApae1.map(nome => `
+                <tr>
+                    <td>${nome}</td>
+                    ${Array.from({ length: 21 }, () => `<td contenteditable="true" class="editable"></td>`).join('')}
+                </tr>
+            `).join(''));
+        </script>
+    </tbody>
+</table>
+
+<!-- Botão de salvar -->
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesApae1 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesApae1.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -300,40 +308,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesApae2 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesApae2.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -405,40 +419,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesApae3 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesApae3.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -510,40 +530,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesApae4 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesApae4.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -619,40 +645,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesPref1 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesPref1.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -724,40 +756,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesPref2 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesPref2.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -829,40 +867,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesPref3 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesPref3.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -938,40 +982,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesNoa1 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesNoa1.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -1045,40 +1095,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesNoa2 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesNoa2.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -1152,40 +1208,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesNoa3 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesNoa3.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -1258,40 +1320,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesNoa4 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesNoa4.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -1364,40 +1432,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesNoa5 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesNoa5.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -1470,40 +1544,46 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesNoa6 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesNoa6.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
-        });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
         });
     });
 </script>
@@ -1576,47 +1656,53 @@
                     </tbody>
                 </table>
                 <!-- Botão de salvar -->
-                <button id="salvar" class="btn btn-primary">Salvar</button>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".editable").forEach(cell => {
-                                cell.addEventListener("input", function() {
-                                let value = this.innerText.toUpperCase().trim();
-                                    if (!["P", "F", "A"].includes(value)) {
-                                        this.innerText = ""; // Remove valores inválidos
-                                    } else {
-                                        this.innerText = value; // Mantém o valor em maiúsculo
-                                    }
-                                });
-            cell.addEventListener("paste", function(e) {
-                e.preventDefault();
-                let text = (e.clipboardData || window.clipboardData).getData("text").toUpperCase().trim();
-                if (["P", "F", "A"].includes(text)) {
-                    document.execCommand("insertText", false, text);
+<button id="salvar" class="btn btn-primary">Salvar</button>
+
+<!-- Upload de Imagens por Mês -->
+<h3 class="mt-5">Upload de Imagens</h3>
+<p>Anexe arquivos PNG correspondentes a cada mês.</p>
+<div id="upload-container" class="row mt-4">
+    <script>
+        const mesesNoa7 = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        document.write(mesesNoa7.map(mes => `
+            <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <label class="form-label d-block text-center"><strong>${mes}</strong></label>
+                <input type="file" class="form-control form-control-sm upload-input" accept="image/png" data-mes="${mes}">
+                <div class="preview mt-3 text-center"></div>
+            </div>
+        `).join(''));
+    </script>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".upload-input").forEach(input => {
+            input.addEventListener("change", function(event) {
+                let file = event.target.files[0];
+                let previewContainer = event.target.nextElementSibling;
+
+                if (file && file.type === "image/png") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" width="80" class="img-thumbnail">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione um arquivo PNG.");
+                    event.target.value = ""; // Reseta o campo caso o arquivo seja inválido
                 }
             });
         });
-
-        document.getElementById("salvar").addEventListener("click", function() {
-            let tabela = document.querySelector("#tabela-frequencia");
-            let dados = [];
-
-            tabela.querySelectorAll("tr").forEach(row => {
-                let cells = row.querySelectorAll("td");
-                let nome = cells[0].innerText.trim();
-                let frequencia = Array.from(cells).slice(1).map(cell => cell.innerText.trim());
-
-                dados.push({ nome, frequencia });
-            });
-
-            console.log("Dados Salvos:", JSON.stringify(dados, null, 2));
-        });
     });
 </script>
+</div>
 
 
-                      </div>
-                </div>
+</div>
             </div>
         </div>
     </div>

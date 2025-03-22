@@ -203,15 +203,22 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
     color: yellow !important;
 }
 
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
 table {
     width: 100%;
     border-collapse: collapse;
+    white-space: nowrap;
 }
 th, td {
     border: 1px solid black;
-    width: 5%;
+    width: auto;
     height: 30px;
     text-align: center;
+    min-width: 50px;
 }
 th {
     background-color: #ddd;

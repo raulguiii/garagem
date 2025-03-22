@@ -178,16 +178,7 @@
                         </a>
                         <ul id="ocorrenciaApae" class="sidebar-dropdown list-unstyled collapse">
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia1apae">ㅤㅤㅤ- Rafal, Ana e Luciana</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia2apae">ㅤㅤㅤ- Márcio e Camily</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia3apae">ㅤㅤㅤ- Alex 2 e Rosanda</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia4apae">ㅤㅤㅤ- Alex e Jennifer</a>
+                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia1apae">ㅤㅤㅤ- Geral</a>
                             </li>
                         </ul>
                     </li>
@@ -198,13 +189,7 @@
                         </a>
                         <ul id="ocorrenciaPref" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia1pref">ㅤㅤㅤ- Flávio, Sara e Ana</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia2pref">ㅤㅤㅤ- Ferraz e Dani</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia3pref">ㅤㅤㅤ- Silvio e Priscila</a>
+                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia1pref">ㅤㅤㅤ- Geral</a>
                             </li>
                         </ul>
                     </li>
@@ -215,25 +200,7 @@
                         </a>
                         <ul id="ocorrenciaNoa" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia1noa">ㅤㅤㅤ- Valter e Alaide</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia2noa">ㅤㅤㅤ- Antonino e Sara</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia3noa">ㅤㅤㅤ- André e Giovana</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia4noa">ㅤㅤㅤ- Leandro e Luara</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia5noa">ㅤㅤㅤ- Sergio e Maísa</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia6noa">ㅤㅤㅤ- Genildo e Estephany</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia7noa">ㅤㅤㅤ- Jussimar e Camila</a>
+                                <a href="#" class="sidebar-link tab-link yellow-text" data-tab="ocorrencia1noa">ㅤㅤㅤ- Geral</a>
                             </li>
                         </ul>
                     </li>
@@ -1489,8 +1456,174 @@
 
 
 
+        <!-- VARIEDADES APAE -->
+<div id="ocorrencia1apae" class="tab-pane fade">
+    <h3 class="mt-5">Variedades APAE</h3>
+    <div class="d-flex align-items-center">
+        <button id="prev" class="btn btn-secondary me-2">&#9664;</button>
+        <div id="carousel" class="d-flex overflow-hidden" style="width: 80%; white-space: nowrap;">
+            <!-- Cards serão adicionados dinamicamente -->
+        </div>
+        <button id="next" class="btn btn-secondary ms-2">&#9654;</button>
+    </div>
+    <button id="addOccurrence" class="btn btn-primary mt-3">Criar Ocorrência</button>
+</div>
 
-            
+<script>
+    const occurrences = [
+        { date: "21/03/2025", title: "Evento Cultural", description: "Uma apresentação cultural com dança e teatro." },
+        { date: "15/03/2025", title: "Palestra Inclusiva", description: "Palestra sobre inclusão e acessibilidade." },
+        { date: "10/03/2025", title: "Oficina de Artes", description: "Atividade prática com pintura e escultura." }
+    ];
+
+    function renderOccurrences() {
+        const carousel = document.getElementById("carousel");
+        carousel.innerHTML = "";
+        occurrences.forEach((occ, index) => {
+            const card = document.createElement("div");
+            card.className = "card p-2 m-2 text-center";
+            card.style = "width: 150px; display: inline-block; cursor: pointer;";
+            card.innerHTML = `<strong>${occ.date}</strong><br>${occ.title}`;
+            card.onclick = () => alert(occ.description);
+            carousel.appendChild(card);
+        });
+    }
+
+    document.getElementById("prev").addEventListener("click", () => {
+        document.getElementById("carousel").scrollBy({ left: -160, behavior: 'smooth' });
+    });
+    document.getElementById("next").addEventListener("click", () => {
+        document.getElementById("carousel").scrollBy({ left: 160, behavior: 'smooth' });
+    });
+
+    document.getElementById("addOccurrence").addEventListener("click", () => {
+        const date = prompt("Digite a data (DD/MM/AAAA):");
+        const title = prompt("Digite o nome do aluno:");
+        const description = prompt("Descreva a ocorrência:");
+        if (date && title && description) {
+            occurrences.push({ date, title, description });
+            renderOccurrences();
+        }
+    });
+
+    renderOccurrences();
+</script>
+
+<!-- VARIEDADES PREFEITURA -->
+<div id="ocorrencia1pref" class="tab-pane fade">
+    <h3 class="mt-5">Variedades Prefeitura</h3>
+    <div class="d-flex align-items-center">
+        <button id="prevPref" class="btn btn-secondary me-2">&#9664;</button>
+        <div id="carouselPref" class="d-flex overflow-hidden" style="width: 80%; white-space: nowrap;">
+            <!-- Cards serão adicionados dinamicamente -->
+        </div>
+        <button id="nextPref" class="btn btn-secondary ms-2">&#9654;</button>
+    </div>
+    <button id="addOccurrencePref" class="btn btn-primary mt-3">Criar Ocorrência</button>
+</div>
+
+<script>
+    const occurrencesPref = [
+        { date: "21/03/2025", title: "Evento Cultural", description: "Uma apresentação cultural com dança e teatro." },
+        { date: "15/03/2025", title: "Palestra Inclusiva", description: "Palestra sobre inclusão e acessibilidade." },
+        { date: "10/03/2025", title: "Oficina de Artes", description: "Atividade prática com pintura e escultura." }
+    ];
+
+    function renderOccurrencesPref() {
+        const carousel = document.getElementById("carouselPref");
+        carousel.innerHTML = "";
+        occurrencesPref.forEach((occ, index) => {
+            const card = document.createElement("div");
+            card.className = "card p-2 m-2 text-center";
+            card.style = "width: 150px; display: inline-block; cursor: pointer;";
+            card.innerHTML = `<strong>${occ.date}</strong><br>${occ.title}`;
+            card.onclick = () => alert(occ.description);
+            carousel.appendChild(card);
+        });
+    }
+
+    document.getElementById("prevPref").addEventListener("click", () => {
+        document.getElementById("carouselPref").scrollBy({ left: -160, behavior: 'smooth' });
+    });
+    document.getElementById("nextPref").addEventListener("click", () => {
+        document.getElementById("carouselPref").scrollBy({ left: 160, behavior: 'smooth' });
+    });
+
+    document.getElementById("addOccurrencePref").addEventListener("click", () => {
+        const date = prompt("Digite a data (DD/MM/AAAA):");
+        const title = prompt("Digite o título da ocorrência:");
+        const description = prompt("Descreva a ocorrência:");
+        if (date && title && description) {
+            occurrencesPref.push({ date, title, description });
+            renderOccurrencesPref();
+        }
+    });
+
+    renderOccurrencesPref();
+</script>
+
+
+<!-- VARIEDADES NOA -->
+<div id="ocorrencia1noa" class="tab-pane fade">
+    <h3 class="mt-5">Variedades NOA</h3>
+    <div class="d-flex align-items-center">
+        <button id="prevNoa" class="btn btn-secondary me-2">&#9664;</button>
+        <div id="carouselNoa" class="d-flex overflow-hidden" style="width: 80%; white-space: nowrap;">
+            <!-- Cards serão adicionados dinamicamente -->
+        </div>
+        <button id="nextNoa" class="btn btn-secondary ms-2">&#9654;</button>
+    </div>
+    <button id="addOccurrenceNoa" class="btn btn-primary mt-3">Criar Ocorrência</button>
+</div>
+
+<script>
+    const occurrencesNoa = [
+        { date: "21/03/2025", title: "Evento Comunitário", description: "Um encontro para fortalecer laços e discutir projetos sociais." },
+        { date: "15/03/2025", title: "Palestra Motivacional", description: "Palestra inspiradora com especialistas em desenvolvimento pessoal." },
+        { date: "10/03/2025", title: "Feira de Artesanato", description: "Exposição de produtos feitos por artesãos locais." }
+    ];
+
+    function renderOccurrencesNoa() {
+        const carousel = document.getElementById("carouselNoa");
+        carousel.innerHTML = "";
+        occurrencesNoa.forEach((occ, index) => {
+            const card = document.createElement("div");
+            card.className = "card p-2 m-2 text-center";
+            card.style = "width: 150px; display: inline-block; cursor: pointer;";
+            card.innerHTML = `<strong>${occ.date}</strong><br>${occ.title}`;
+            card.onclick = () => alert(occ.description);
+            carousel.appendChild(card);
+        });
+    }
+
+    document.getElementById("prevNoa").addEventListener("click", () => {
+        document.getElementById("carouselNoa").scrollBy({ left: -160, behavior: 'smooth' });
+    });
+    document.getElementById("nextNoa").addEventListener("click", () => {
+        document.getElementById("carouselNoa").scrollBy({ left: 160, behavior: 'smooth' });
+    });
+
+    document.getElementById("addOccurrenceNoa").addEventListener("click", () => {
+        const date = prompt("Digite a data (DD/MM/AAAA):");
+        const title = prompt("Digite o título da ocorrência:");
+        const description = prompt("Descreva a ocorrência:");
+        if (date && title && description) {
+            occurrencesNoa.push({ date, title, description });
+            renderOccurrencesNoa();
+        }
+    });
+
+    renderOccurrencesNoa();
+</script>
+
+    
+         
+        
+
+
+
+
+
             </div>   
 </div>
         </div>

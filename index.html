@@ -1455,18 +1455,33 @@
 
 
 
-
-        <!-- VARIEDADES APAE -->
+<!-- VARIEDADES APAE -->
 <div id="ocorrencia1apae" class="tab-pane fade">
     <h3 class="mt-5">Variedades APAE</h3>
-    <div class="d-flex align-items-center">
+
+    <!-- Ocorrências -->
+    <h5 class="mt-4">Ocorrências</h5>
+    <div class="d-flex align-items-center mb-4">
         <button id="prev" class="btn btn-secondary me-2">&#9664;</button>
         <div id="carousel" class="d-flex overflow-hidden" style="width: 80%; white-space: nowrap;">
             <!-- Cards serão adicionados dinamicamente -->
         </div>
         <button id="next" class="btn btn-secondary ms-2">&#9654;</button>
     </div>
-    <button id="addOccurrence" class="btn btn-primary mt-3">Criar Ocorrência</button>
+    
+    <button id="addOccurrence" class="btn btn-primary mb-5">Criar Ocorrência</button>
+
+    <!-- Campo para envio de atestados -->
+    <h5 class="mt-5">Atestados</h5>
+    <div class="mb-4">
+        <input type="text" id="atestTitle" class="form-control my-3" placeholder="Digite o título do atestado">
+        <input type="file" id="atestFile" accept="image/png" class="form-control my-3">
+        <button id="uploadAtest" class="btn btn-success">Enviar Atestado</button>
+    </div>
+
+    <!-- Lista de Atestados -->
+    <h6 class="mt-5">Atestados Enviados</h6>
+    <ul id="atestList" class="list-group mb-5"></ul>
 </div>
 
 <script>
@@ -1475,6 +1490,8 @@
         { date: "15/03/2025", title: "Palestra Inclusiva", description: "Palestra sobre inclusão e acessibilidade." },
         { date: "10/03/2025", title: "Oficina de Artes", description: "Atividade prática com pintura e escultura." }
     ];
+
+    const atestados = [];
 
     function renderOccurrences() {
         const carousel = document.getElementById("carousel");
@@ -1489,9 +1506,24 @@
         });
     }
 
+    function renderAtestados() {
+        const list = document.getElementById("atestList");
+        list.innerHTML = "";
+        atestados.forEach((atestado, index) => {
+            const item = document.createElement("li");
+            item.className = "list-group-item d-flex justify-content-between align-items-center";
+            item.innerHTML = `
+                <span>${atestado.title}</span>
+                <a href="${atestado.file}" target="_blank" class="btn btn-sm btn-primary">Ver</a>
+            `;
+            list.appendChild(item);
+        });
+    }
+
     document.getElementById("prev").addEventListener("click", () => {
         document.getElementById("carousel").scrollBy({ left: -160, behavior: 'smooth' });
     });
+
     document.getElementById("next").addEventListener("click", () => {
         document.getElementById("carousel").scrollBy({ left: 160, behavior: 'smooth' });
     });
@@ -1506,20 +1538,67 @@
         }
     });
 
+    document.getElementById("uploadAtest").addEventListener("click", () => {
+        const title = document.getElementById("atestTitle").value;
+        const fileInput = document.getElementById("atestFile");
+        
+        if (!title) {
+            alert("Digite um título para o atestado!");
+            return;
+        }
+        
+        if (fileInput.files.length === 0) {
+            alert("Selecione um arquivo PNG!");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        if (file.type !== "image/png") {
+            alert("Apenas arquivos PNG são permitidos!");
+            return;
+        }
+
+        const fileURL = URL.createObjectURL(file);
+        atestados.push({ title, file: fileURL });
+        renderAtestados();
+
+        // Limpar os campos após o envio
+        document.getElementById("atestTitle").value = "";
+        document.getElementById("atestFile").value = "";
+    });
+
     renderOccurrences();
+    renderAtestados();
 </script>
+
+
 
 <!-- VARIEDADES PREFEITURA -->
 <div id="ocorrencia1pref" class="tab-pane fade">
     <h3 class="mt-5">Variedades Prefeitura</h3>
-    <div class="d-flex align-items-center">
+
+    <!-- Ocorrências -->
+    <h5 class="mt-4">Ocorrências</h5>
+    <div class="d-flex align-items-center mb-4">
         <button id="prevPref" class="btn btn-secondary me-2">&#9664;</button>
         <div id="carouselPref" class="d-flex overflow-hidden" style="width: 80%; white-space: nowrap;">
             <!-- Cards serão adicionados dinamicamente -->
         </div>
         <button id="nextPref" class="btn btn-secondary ms-2">&#9654;</button>
     </div>
-    <button id="addOccurrencePref" class="btn btn-primary mt-3">Criar Ocorrência</button>
+    <button id="addOccurrencePref" class="btn btn-primary mb-5">Criar Ocorrência</button>
+
+    <!-- Campo para envio de atestados -->
+    <h5>Atestados</h5>
+    <div class="mb-3">
+        <input type="text" id="atestTitlePref" class="form-control my-2" placeholder="Digite o título do atestado">
+        <input type="file" id="atestFilePref" accept="image/png" class="form-control my-2">
+        <button id="uploadAtestPref" class="btn btn-success">Enviar Atestado</button>
+    </div>
+
+    <!-- Lista de Atestados -->
+    <h6 class="mt-4">Atestados Enviados</h6>
+    <ul id="atestListPref" class="list-group"></ul>
 </div>
 
 <script>
@@ -1529,10 +1608,12 @@
         { date: "10/03/2025", title: "Oficina de Artes", description: "Atividade prática com pintura e escultura." }
     ];
 
+    const atestadosPref = [];
+
     function renderOccurrencesPref() {
         const carousel = document.getElementById("carouselPref");
         carousel.innerHTML = "";
-        occurrencesPref.forEach((occ, index) => {
+        occurrencesPref.forEach((occ) => {
             const card = document.createElement("div");
             card.className = "card p-2 m-2 text-center";
             card.style = "width: 150px; display: inline-block; cursor: pointer;";
@@ -1542,9 +1623,24 @@
         });
     }
 
+    function renderAtestadosPref() {
+        const list = document.getElementById("atestListPref");
+        list.innerHTML = "";
+        atestadosPref.forEach((atestado) => {
+            const item = document.createElement("li");
+            item.className = "list-group-item d-flex justify-content-between align-items-center";
+            item.innerHTML = `
+                <span>${atestado.title}</span>
+                <a href="${atestado.file}" target="_blank" class="btn btn-sm btn-primary">Ver</a>
+            `;
+            list.appendChild(item);
+        });
+    }
+
     document.getElementById("prevPref").addEventListener("click", () => {
         document.getElementById("carouselPref").scrollBy({ left: -160, behavior: 'smooth' });
     });
+
     document.getElementById("nextPref").addEventListener("click", () => {
         document.getElementById("carouselPref").scrollBy({ left: 160, behavior: 'smooth' });
     });
@@ -1559,21 +1655,66 @@
         }
     });
 
+    document.getElementById("uploadAtestPref").addEventListener("click", () => {
+        const title = document.getElementById("atestTitlePref").value;
+        const fileInput = document.getElementById("atestFilePref");
+
+        if (!title) {
+            alert("Digite um título para o atestado!");
+            return;
+        }
+
+        if (fileInput.files.length === 0) {
+            alert("Selecione um arquivo PNG!");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        if (file.type !== "image/png") {
+            alert("Apenas arquivos PNG são permitidos!");
+            return;
+        }
+
+        const fileURL = URL.createObjectURL(file);
+        atestadosPref.push({ title, file: fileURL });
+        renderAtestadosPref();
+
+        // Limpar os campos após o envio
+        document.getElementById("atestTitlePref").value = "";
+        document.getElementById("atestFilePref").value = "";
+    });
+
     renderOccurrencesPref();
+    renderAtestadosPref();
 </script>
 
 
 <!-- VARIEDADES NOA -->
 <div id="ocorrencia1noa" class="tab-pane fade">
     <h3 class="mt-5">Variedades NOA</h3>
-    <div class="d-flex align-items-center">
+
+    <!-- Ocorrências -->
+    <h5 class="mt-4">Ocorrências</h5>
+    <div class="d-flex align-items-center mb-4">
         <button id="prevNoa" class="btn btn-secondary me-2">&#9664;</button>
         <div id="carouselNoa" class="d-flex overflow-hidden" style="width: 80%; white-space: nowrap;">
             <!-- Cards serão adicionados dinamicamente -->
         </div>
         <button id="nextNoa" class="btn btn-secondary ms-2">&#9654;</button>
     </div>
-    <button id="addOccurrenceNoa" class="btn btn-primary mt-3">Criar Ocorrência</button>
+    <button id="addOccurrenceNoa" class="btn btn-primary mb-5">Criar Ocorrência</button>
+
+    <!-- Campo para envio de atestados -->
+    <h5>Atestados</h5>
+    <div class="mb-3">
+        <input type="text" id="atestTitleNoa" class="form-control my-2" placeholder="Digite o título do atestado">
+        <input type="file" id="atestFileNoa" accept="image/png" class="form-control my-2">
+        <button id="uploadAtestNoa" class="btn btn-success">Enviar Atestado</button>
+    </div>
+
+    <!-- Lista de Atestados -->
+    <h6 class="mt-4">Atestados Enviados</h6>
+    <ul id="atestListNoa" class="list-group"></ul>
 </div>
 
 <script>
@@ -1583,10 +1724,12 @@
         { date: "10/03/2025", title: "Feira de Artesanato", description: "Exposição de produtos feitos por artesãos locais." }
     ];
 
+    const atestadosNoa = [];
+
     function renderOccurrencesNoa() {
         const carousel = document.getElementById("carouselNoa");
         carousel.innerHTML = "";
-        occurrencesNoa.forEach((occ, index) => {
+        occurrencesNoa.forEach((occ) => {
             const card = document.createElement("div");
             card.className = "card p-2 m-2 text-center";
             card.style = "width: 150px; display: inline-block; cursor: pointer;";
@@ -1596,9 +1739,24 @@
         });
     }
 
+    function renderAtestadosNoa() {
+        const list = document.getElementById("atestListNoa");
+        list.innerHTML = "";
+        atestadosNoa.forEach((atestado) => {
+            const item = document.createElement("li");
+            item.className = "list-group-item d-flex justify-content-between align-items-center";
+            item.innerHTML = `
+                <span>${atestado.title}</span>
+                <a href="${atestado.file}" target="_blank" class="btn btn-sm btn-primary">Ver</a>
+            `;
+            list.appendChild(item);
+        });
+    }
+
     document.getElementById("prevNoa").addEventListener("click", () => {
         document.getElementById("carouselNoa").scrollBy({ left: -160, behavior: 'smooth' });
     });
+
     document.getElementById("nextNoa").addEventListener("click", () => {
         document.getElementById("carouselNoa").scrollBy({ left: 160, behavior: 'smooth' });
     });
@@ -1613,8 +1771,39 @@
         }
     });
 
+    document.getElementById("uploadAtestNoa").addEventListener("click", () => {
+        const title = document.getElementById("atestTitleNoa").value;
+        const fileInput = document.getElementById("atestFileNoa");
+
+        if (!title) {
+            alert("Digite um título para o atestado!");
+            return;
+        }
+
+        if (fileInput.files.length === 0) {
+            alert("Selecione um arquivo PNG!");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        if (file.type !== "image/png") {
+            alert("Apenas arquivos PNG são permitidos!");
+            return;
+        }
+
+        const fileURL = URL.createObjectURL(file);
+        atestadosNoa.push({ title, file: fileURL });
+        renderAtestadosNoa();
+
+        // Limpar os campos após o envio
+        document.getElementById("atestTitleNoa").value = "";
+        document.getElementById("atestFileNoa").value = "";
+    });
+
     renderOccurrencesNoa();
+    renderAtestadosNoa();
 </script>
+
 
     
          

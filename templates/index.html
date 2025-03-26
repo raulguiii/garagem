@@ -8,8 +8,8 @@
     <title>Transporte Adaptado - SEMECTI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="image/logopref.png" />
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="icon" type="image/x-icon" href="static/image/logopref.png" />
 </head>
 
 <body>
@@ -219,21 +219,21 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown d-flex align-items-center">
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="image/icon.girl.png" class="avatar img-fluid rounded" alt="">
+                                <img src="static/image/icon.girl.png" class="avatar img-fluid rounded" alt="">
                             </a>
                             <div class="d-flex flex-column">
-                                <span class="fw-bold" style="font-size: 16px;">Valter Junior</span>
-                                <span class="text-muted" style="font-size: 12px;">Chefe</span>
+                                <span class="fw-bold" style="font-size: 16px;">{{ usuario }}</span>
+                                <span class="text-muted" style="font-size: 12px;">{{ cargo }}</span>
                             </div>
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0 ms-2">
                                 <i class="bi bi-caret-down-fill"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item">Sair</a>
+                                <a href="{{ url_for('logout') }}" class="dropdown-item">Sair</a>
                             </div>
                         </li>
                     </ul>
-                </div>                       
+                </div>                                      
             </nav>
             
             <!-- Conteúdo das Abas -->
@@ -1561,7 +1561,7 @@
     <h5 class="mt-5">Atestados</h5>
     <div class="mb-4">
         <input type="text" id="atestTitle" class="form-control my-3" placeholder="Digite o título do atestado">
-        <input type="file" id="atestFile" accept="image/png" class="form-control my-3">
+        <input type="file" id="atestFile" accept="static/image/png" class="form-control my-3">
         <button id="uploadAtest" class="btn btn-success">Enviar Atestado</button>
     </div>
 
@@ -1639,7 +1639,7 @@
         }
 
         const file = fileInput.files[0];
-        if (file.type !== "image/png") {
+        if (file.type !== "static/image/png") {
             alert("Apenas arquivos PNG são permitidos!");
             return;
         }
@@ -1678,7 +1678,7 @@
     <h5>Atestados</h5>
     <div class="mb-3">
         <input type="text" id="atestTitlePref" class="form-control my-2" placeholder="Digite o título do atestado">
-        <input type="file" id="atestFilePref" accept="image/png" class="form-control my-2">
+        <input type="file" id="atestFilePref" accept="static/image/png" class="form-control my-2">
         <button id="uploadAtestPref" class="btn btn-success">Enviar Atestado</button>
     </div>
 
@@ -1756,7 +1756,7 @@
         }
 
         const file = fileInput.files[0];
-        if (file.type !== "image/png") {
+        if (file.type !== "static/image/png") {
             alert("Apenas arquivos PNG são permitidos!");
             return;
         }
@@ -1794,7 +1794,7 @@
     <h5>Atestados</h5>
     <div class="mb-3">
         <input type="text" id="atestTitleNoa" class="form-control my-2" placeholder="Digite o título do atestado">
-        <input type="file" id="atestFileNoa" accept="image/png" class="form-control my-2">
+        <input type="file" id="atestFileNoa" accept="static/image/png" class="form-control my-2">
         <button id="uploadAtestNoa" class="btn btn-success">Enviar Atestado</button>
     </div>
 
@@ -1872,7 +1872,7 @@
         }
 
         const file = fileInput.files[0];
-        if (file.type !== "image/png") {
+        if (file.type !== "static/image/png") {
             alert("Apenas arquivos PNG são permitidos!");
             return;
         }
@@ -1904,31 +1904,8 @@
         </div>
     </div>
 
-    <script>
-        document.querySelectorAll('.tab-link').forEach(link => {
-            link.addEventListener('click', function () {
-                let tabId = this.getAttribute('data-tab');
-
-                document.querySelectorAll('.tab-pane').forEach(tab => {
-                    tab.classList.remove('show', 'active');
-                });
-
-                document.getElementById(tabId).classList.add('show', 'active');
-            });
-        });
-        
-        document.addEventListener("DOMContentLoaded", function () {
-        const logoutButton = document.querySelector(".dropdown-item");
-
-        logoutButton.addEventListener("click", function (event) {
-            event.preventDefault(); // Previne o comportamento padrão do link
-            window.location.href = "login.html";
-        });
-    });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="static/js/script.js"></script>
 </body>
 </html>
 
